@@ -6,22 +6,19 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
-        Schema::create('spels', function (Blueprint $table) {
+        Schema::create('spellen', function (Blueprint $table) {
             $table->id();
+            $table->string('status')->default('bezig');
+            $table->dateTime('gestart_op');
+            $table->foreignId('winnaar_id')->nullable()->constrained('users')->nullOnDelete();
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        Schema::dropIfExists('spels');
+        Schema::dropIfExists('spellen');
     }
 };

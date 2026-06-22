@@ -6,20 +6,19 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('rondes', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('spel_id')->constrained('spellen')->cascadeOnDelete();
+            $table->foreignId('speler_id')->constrained('users')->cascadeOnDelete();
+            $table->foreignId('zet_id')->constrained('zetten')->cascadeOnDelete();
+            $table->integer('ronde_nummer');
+            $table->string('ronde_uitkomst')->nullable();
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('rondes');
