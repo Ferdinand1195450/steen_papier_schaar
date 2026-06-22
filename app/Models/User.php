@@ -29,4 +29,16 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function spellen()
+    {
+        return $this->belongsToMany(Spel::class, 'spel_speler', 'speler_id', 'spel_id');
+    } 
+
+    public function rondes()
+    {
+        return $this->hasMany(Ronde::class, 'speler_id');
+    }
 }
+
+
