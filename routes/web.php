@@ -1,10 +1,14 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SpelController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [SpelController::class, 'landing'])->name('landing');
+
+Route::get('/dashboard', function () {
+    return redirect()->route('spellen.index');
+})->middleware(['auth'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/spellen', [SpelController::class, 'index'])->name('spellen.index');
